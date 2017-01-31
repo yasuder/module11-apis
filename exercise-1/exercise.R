@@ -1,17 +1,26 @@
 ### Exercise 1 ###
 
 # Load the httr and jsonlite libraries for accessing data
-
+library("jsonlite")
+library("httr")
+library("dplyr")
 
 ## For these questions, look at the API documentation to identify the appropriate endpoint and information.
 ## Then send GET() request to fetch the data, then extract the answer to the question
-
+response <- GET("http://data.unhcr.org/api/stats/time_series_years.json")
 # For what years does the API have statistical data?
-
+body <- content(response, "text")
+years <- fromJSON(body)
+years
 
 # What is the "country code" for the "Syrian Arab Republic"?
-
-
+country.response <- GET("http://data.unhcr.org/api/countries/list.json")
+country.body <- content(country.response, "text")
+country.codes <- fromJSON(country.body)
+is.data.frame(country.codes)
+country.codes <- filter(country.codes, name_en == "Syrian Arab Republic") %>% 
+  select(country_code)
+country.codes
 # How many persons of concern from Syria applied for residence in the USA in 2013?
 # Hint: you'll need to use a query parameter
 # Use the `str()` function to print the data of interest
