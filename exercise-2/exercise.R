@@ -1,10 +1,12 @@
 ### Exercise 2 ###
 
 # Load the httr and jsonlite libraries for accessing data
-
+library("httr")
+library("jsonlite")
+library("dplyr")
 
 # Create a `base.uri` variable that holds the base uri. You wil then paste endpoints to this base.
-
+base.uri <- "https://api.spotify.com"
 
 
 ## As you may have noticed, it often takes multiple queries to retrieve the desired information.
@@ -14,12 +16,16 @@
 
 # Define a function `TopTrackSearch` that takes in an artist name as an argument,
 # and returns the top 10 tracks (in the US) by that artist
-
+TopTrackSearch <- function(artist) {
+  artist.endpoint <- paste("/v1/artists/", artist, "/top-tracks", sep = "")
+  body <- GET(paste(base.uri, artist.endpoint, sep = ""))
+  return(body)
+}
 
 
 
 # What are the top 10 tracks by Beyonce?
-
+TopTrackSearch("beyonce")
 
 # Use the `flatten` function to flatten the data.frame -- note what differs!
 
