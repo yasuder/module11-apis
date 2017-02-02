@@ -4,12 +4,18 @@ library("jsonlite")
 
 # Use `source()` to load your API key variable.
 # Make sure you've set your working directory!
-
-
+# getwd()
+# setwd("../exercise-4/")
+ 
+source("apikey.R")
 
 # Define a function that takes in the name of a movie as an argument and returns
 # a list of information about that movie. The steps for this algorithm are below:
-
+base.uri <- "https://api.nytimes.com/svc/movies/v2/"
+movie.resource <- "reviews/search.json"
+MovieInfo <- function(movie) {
+  
+}
 
     # Construct an HTTP request to search for reviews for the given movie.
     # The base URI is `https://api.nytimes.com/svc/movies/v2/`
